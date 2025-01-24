@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>História da Programação</title>
     <style>
+              #toggleButton {
+            position: absolute;
+            top: 10px; /* Distância do topo */
+            right: 10px; /* Distância da direita */
+            z-index: 1000; /* Para garantir que o botão fique acima de outros elementos */
+        }
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
@@ -74,52 +80,146 @@
             font-size: 16px;
             line-height: 1.5;
         }
+        .moon-icon {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            flex-direction: column;
+        }
+        .moon-icon:hover {
+         background-color: #f0f0f0;
+        }
+        .moon-icon.dark-mode {
+            background-color: #222;
+        }
+        .moon-icon span {
+            font-size: 12px;
+            color: #333;
+        }
+        .moon-icon.dark-mode span {
+            color: #fff;
+        }
+        .color-toggle {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            background-color: #007bff;
+            border: 1px solid #0056b3;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .color-toggle.black {
+            background-color: black;
+            color: white;
+        }
+        .color-toggle.white {
+            background-color: white;
+            color: black;
+        }
+        .color-toggle:hover {
+            background-color: #0056b3;
+            color: #ffffff;
+        }
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+        .light-mode {
+            background-color: white;
+            color: black;
+        }
     </style>
     <script>
+        let isDarkMode = false; // Variável para controlar o modo
+
+        function toggleColorMode() {
+            const container = document.querySelector('.container');
+            isDarkMode = !isDarkMode; // Alterna o estado
+
+            // Atualiza as classes do container com base no estado
+            if (isDarkMode) {
+                container.classList.add('dark-mode');
+                container.classList.remove('light-mode');
+            } else {
+                container.classList.add('light-mode');
+                container.classList.remove('dark-mode');
+            }
+        }
+
         function showCards() {
             const cards = document.getElementById('cards');
-            cards.style.display = cards.style.display === 'none' ? 'flex' : 'none';
+            // Alterna a exibição das cartas
+            if (cards.style.display === 'none' || cards.style.display === '') {
+                cards.style.display = 'flex'; // Mostra as cartas
+            } else {
+                cards.style.display = 'none'; // Esconde as cartas
+            }
         }
     </script>
 </head>
 <body>
     <header>
-        <h1>História da Programação:</h1>
+        <h1>História da Programação</h1>
+        
     </header>
-    <div class="container">
-        <H1>programação :</H1>
+ 
+    <div class="container light-mode">
+        <div class="color-toggle" onclick="toggleColorMode()">
+            <img src="https://example.com/moon-icon.png" alt="Trocar Cor" style="width: 30px; height: 30px;">
+        </div>
+        <h2>Programação</h2>
+       
         <p>Programar com cartões perfurados foi uma prática comum durante os primeiros dias da computação, especialmente nas décadas de 1950 a 1970. Era um processo manual, trabalhoso e muito diferente da forma como programamos hoje.</p>
-        <H1>perfuração dos cartões:</H1>
-         
-          <li>Cada coluna do cartão representava um caractere (letras, números ou símbolos). Um cartão padrão tinha 80 colunas.</li>
-          
-          <li>O código era transferido para os cartões perfurados usando uma máquina perfuradora. Essas máquinas tinham um teclado, e cada tecla fazia um furo correspondente em uma posição do cartão.</li>
-        <h1>Tempo de processamento:</h1>
-        <li>Como os computadores da época eram lentos, podia levar horas (ou dias) para que o programa fosse processado e retornasse com os resultados</li>
+        
+        <h2>Perfuração dos Cartões</h2>
+        <ul>
+            <li>Cada coluna do cartão representava um caractere (letras, números ou símbolos). Um cartão padrão tinha 80 colunas.</li>
+            <li>O código era transferido para os cartões perfurados usando uma máquina perfuradora, que tinha um teclado para fazer furos correspondentes.</li>
+        </ul>
+        
+        <h2>Tempo de Processamento</h2>
+        <ul>
+            <li>Como os computadores da época eram lentos, podia levar horas (ou dias) para que o programa fosse processado e retornasse com os resultados.</li>
+        </ul>
+        
         <div class="button-container">
-            <button onclick="showCards()">enter</button>
+            <button onclick="showCards()">Entrar</button>
         </div>
 
         <div class="cards" id="cards" style="display: none;">
             <div class="card">
-                <img src="https://previews.123rf.com/images/claudiodivizia/claudiodivizia2004/claudiodivizia200400005/143600363-cart%C3%A3o-perfurado-vintage-para-armazenamento-e-programa%C3%A7%C3%A3o-de-dados-de-computador.jpg" alt="Cartões Perfurados">
+                <img src="https://previews.123rf.com/images/claudiodivizia/claudiodivizia2004/claudiodivizia200400005/143600363-cart%C3%A3o-perfurado-vintage-para-armazenamento-e-programa%C3%A7%C3%A3o-de-dados-de-computador.jpg" alt="Imagem de um cartão perfurado vintage">
                 <p>Cartões Perfurados - Eram utilizados para entrada de dados em computadores antigos, permitindo a programação através de furos em cartões de papel.</p>
             </div>
             <div class="card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRujrHIfyHPwrI64Nm6xIsILoxiXuzPEWNqBA&s" alt="Programação em Livros">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRujrHIfyHPwrI64Nm6xIsILoxiXuzPEWNqBA&s" alt="Imagem de programação em livros">
                 <p>Programação em Livros - Na época, a programação era documentada em livros, onde os algoritmos e códigos eram escritos à mão, antes da era digital.</p>
             </div>
             <div class="card">
-                <img src="https://jornal.usp.br/wp-content/uploads/2024/09/20240925_ada-lovelace.jpg" alt="Ada Lovelace">
+                <img src="https://jornal.usp.br/wp-content/uploads/2024/09/20240925_ada-lovelace.jpg" alt="Retrato de Ada Lovelace">
                 <p>Ada Lovelace - Considerada a primeira programadora da história, contribuiu para o desenvolvimento do conceito de algoritmos.</p>
             </div>
             <div class="card">
-                <img src="https://pplware.sapo.pt/wp-content/uploads/2017/09/charles-babbage-720x450.jpg" alt="Charles Babbage">
+                <img src="https://pplware.sapo.pt/wp-content/uploads/2017/09/charles-babbage-720x450.jpg" alt="Retrato de Charles Babbage">
                 <p>Charles Babbage - Criador da Máquina Analítica, um precursor dos computadores modernos, que influenciou a programação.</p>
-               
-     
-     
- 
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 
 
 
